@@ -1,0 +1,32 @@
+$primary: #000000;
+$secondary: #7f8080;
+$success: #2fbbf9;
+$danger: #ec008c;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "danger": $danger
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+h1, h2 {
+   color: $success;
+}
+.navbar-light .navbar-nav .nav-link{
+   color: $success;
+}
+.navbar-light .navbar-brand{
+   color: $success;
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .nav-link.active{
+   color: $primary;
+}
+p {
+   color: $secondary;
+}
+body{
+   background-color: $primary;
+}
