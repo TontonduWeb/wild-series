@@ -24,6 +24,9 @@ h1, h2 {
 .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .nav-link.active{
    color: $primary;
 }
+a {
+   color: $danger;
+}
 p {
    color: $secondary;
 }
