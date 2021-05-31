@@ -2,14 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Program;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/categories", name="category_")
@@ -19,10 +16,9 @@ class CategoryController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(CategoryRepository $categoryRepository): Response
     {
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
+        $categories = $categoryRepository
             ->findAll();
 
         return $this->render('category/index.html.twig', [
@@ -31,37 +27,25 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{name}", name="show")
+     * @Route("/{categoryName}", name="show")
      */
-    public function show(string $name, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
+    public function show(string $categoryName, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
     {
-        $categoryName = $categoryRepository
-            ->findBy(['name' => $name]);
+        $category = $categoryRepository->findOneBy(['name' => $categoryName]);
 
-        if (!$categoryName) {
+        if (!$category) {
             throw $this->createNotFoundException(
-                'No category with this name : ' . $name . ' found in category\'s table.'
+                'No category with this name : ' . $categoryName . ' found in category\'s table.'
             );
         }else{
             $myLimit = 3;
-        $categoryProgram = $programRepository
-            ->findBy(['category' => $categoryName],
+            $programs = $programRepository->findBy(['category' => $category],
                     ['id' => 'DESC'],
                     $myLimit);
         }
+
         return $this->render('category/show.html.twig', [
-            'programs' => $categoryProgram
+            'programs' => $programs
             ]);
     }
-
-//    /**
-//     * @Route("/create", name="create")
-//     */
-//    public function addCategory(EntityManagerInterface $entityManager): Response
-//    {
-//        $categoryHumour = new Category();
-//        $categoryHumour->setName('Humour');
-//        $entityManager->persist($categoryHumour);
-//        $entityManager->flush();
-//    }
 }
