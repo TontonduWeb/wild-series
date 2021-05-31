@@ -41,14 +41,14 @@ class ProgramController extends AbstractController
      * @Route("/show/{id<^[0-9]+$>}", name="show")
      * @return Response
      */
-    public function show(int $id, CategoryRepository $categoryRepository, SeasonRepository $seasonRepository): Response
+    public function show(Category $category, Program $program, CategoryRepository $categoryRepository, SeasonRepository $seasonRepository): Response
     {
-        $program = $categoryRepository
-            ->findOneBy(['id' => $id]);
+        $serie = $categoryRepository
+            ->findOneBy(['id' => $category]);
 
-        if(!$program) {
+        if(!$serie) {
             throw $this->createNotFoundException(
-                'No program with id : '.$id.' found in program\'s table.'
+                'No program with id : '. $serie . ' found in program\'s table.'
             );
         }
         $seasons = $seasonRepository
