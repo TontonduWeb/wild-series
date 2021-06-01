@@ -7,7 +7,8 @@
     <div>
            <h1>{{ seasons.description }}</h1>
         {% for episode in episodes %}
-        <p>{{ episode.title }}</p>
+
+            <a href="{{ path("program_episode_show", {"programId" : 1, "seasonId": 2, "episodeId": 3}) }}"><h2>Episode {{ loop.index}} - {{ episode.title }}</h2></a>
         {% endfor %}
     </div>
 
