@@ -29,7 +29,6 @@ class ProgramController extends AbstractController
     {
         $programs = $programRepository
             ->findAll();
-//        dd($programs);
 
         return $this->render('program/index.html.twig', ['programs' => $programs]);
     }
@@ -43,6 +42,7 @@ class ProgramController extends AbstractController
      * @param SeasonRepository $seasonRepository
      * @return Response
      */
+
     public function show(Program $program, CategoryRepository $categoryRepository, SeasonRepository $seasonRepository): Response
     {
         $program = $categoryRepository
@@ -59,7 +59,7 @@ class ProgramController extends AbstractController
         return $this->render('program/show.html.twig', [
             'program' => $program,
             'seasons' => $seasons,
-            ]);
+        ]);
     }
 
     /**
