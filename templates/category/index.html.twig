@@ -6,7 +6,10 @@
 
     {% for category in categories %}
 <div>
-    <a href="{{ path('category_show', {name: category.name}) }}"><h1>{{ category.id }} - {{ category.name }}</h1></a>
+    <a href="{{ path('category_show', {name: category.name}) }}"><h1>{{ loop.index }} - {{ category.name }}</h1></a>
 </div>
     {% endfor %}
+    <div>
+        <a href="{{ path('app_index') }}">Retour à l'accueil</a>
+    </div>
 {% endblock %}

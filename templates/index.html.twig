@@ -3,4 +3,17 @@
 {% block body %}
     <h1>{{ accueil }}</h1>
     <img src="{{ asset('build/twig.png') }}" alt="twig-logo"/>
+    <div>
+        <ul>
+            <li>
+                <a href="{{ path('category_index') }}">Découvrez les catégories !</a>
+            </li>
+            <li>
+                <a href="{{ path('category_new') }}">Ajoutez une catégorie</a>
+            </li>
+            <li>
+                <a href="{{ path('program_new') }}">Ajoutez une série</a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}

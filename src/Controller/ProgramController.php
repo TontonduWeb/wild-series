@@ -3,19 +3,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
-use App\Repository\CategoryRepository;
-use App\Repository\EpisodeRepository;
+use App\Entity\Episode;
+use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CategoryRepository;
+use App\Repository\EpisodeRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
     /**
      * @Route("/programs", name="program_")
@@ -24,13 +25,33 @@ class ProgramController extends AbstractController
 {
     /**
      * @Route("/", name="index")
+     * @return Response
      */
     public function index(ProgramRepository $programRepository): Response
     {
-        $programs = $programRepository
-            ->findAll();
+        $programs = $programRepository->findAll();
 
         return $this->render('program/index.html.twig', ['programs' => $programs]);
+    }
+
+    /**
+     * @Route("/new", name="new")
+     */
+    public function new(Request $request, ProgramRepository $program): Response
+    {
+        $program = new Program();
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($program);
+            $entityManager->flush();
+            return $this->redirectToRoute('program_index');
+        }
+        return $this->render('program/new.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -42,10 +63,9 @@ class ProgramController extends AbstractController
      * @param SeasonRepository $seasonRepository
      * @return Response
      */
-
-    public function show(Program $program, CategoryRepository $categoryRepository, SeasonRepository $seasonRepository): Response
+    public function show(Program $program, ProgramRepository $programRepository, SeasonRepository $seasonRepository): Response
     {
-        $program = $categoryRepository
+        $program = $programRepository
             ->findOneBy(['id' => $program]);
 
         if(!$program) {
@@ -63,7 +83,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{program_id<^[0-9]+$>}/season/{season_id<^[0-9]+$>}"), name="season_show"
+     * @Route("/{program_id}/seasons/{season_id}", name="season_show")
      * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"program_id": "id"}})
      * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"season_id": "id"}})
      */
@@ -97,14 +117,15 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{programId}/seasons/{seasonId}/episodes/{episodeId}", name="episode_show")
-     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"programId": "id"}})
-     * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"seasonId": "id"}})
-     * @ParamConverter("episode", class="App\Entity\Episode", options={"mapping": {"episodeId": "id"}})
+     * @Route("/{program}/seasons/{season}/episodes/{episode}", name="episode_show")
+     * @param Program $program
+     * @param Season $season
+     * @param Episode $episode
+     * @return Response
      */
-    public function showEpisode(Program $program, Season $season, Episode $episode)
+    public function showEpisode(Program $program, Season $season, Episode $episode): Response
     {
-        return $this->render('program/episode_show.html.twig', [
+        return $this->render("program/episode_show.html.twig", [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,

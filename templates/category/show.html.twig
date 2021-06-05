@@ -5,20 +5,29 @@
         <div class="media-body">
             {% if programs | length >= 1 %}
                 {% for program in programs %}
-                    <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
-                    <div class="media-body">
-                        <a href="{{ path('program_show', {id: program.id}) }}"><h1 class="mt-0">{{ program.id }} - {{ program.title }}</h1></a>
-                        <p>{{ program.summary }}</p>
-                        <p>Categorie : {{ program.category.name }}</p>
-                    </div>
+                    <a href="{{ path('program_show', {id: program.id}) }}">
+                        <div class="media-body">
+                            <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+                            <h2 class="mt-0">{{ program.id }} - {{ program.title }}</h2>
+                            <p>{{ program.summary }}</p>
+                            <p>Categorie : {{ program.category.name }}</p>
+                        </div>
+                    </a>
                 {% endfor %}
             {% else %}
             <p>Aucune série trouvée</p>
         </div>
             {% endif %}
     </div>
-
-    <a href="{{ path('program_index') }}">
-        Retour à la liste des programmes
-    </a>
+    <div>
+        <h2>Retour vers les séries</h2>
+        <ul>
+            <li>
+                <a href="{{ path("category_index") }}">Retrouvez toutes les catégories</a>
+            </li>
+            <li>
+                <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}

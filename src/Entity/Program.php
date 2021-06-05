@@ -25,7 +25,7 @@ class Program
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $summary;
 
@@ -35,18 +35,12 @@ class Program
     private $poster;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="programs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
-    /**
      * @ORM\OneToMany(targetEntity=Season::class, mappedBy="program")
      */
     private $seasons;
 
     /**
-     * @ORM\Column(type="string", length=800)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $synopsis;
 
@@ -59,6 +53,12 @@ class Program
      * @ORM\Column(type="integer", nullable=true)
      */
     private $year;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="programs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function __construct()
     {
@@ -102,18 +102,6 @@ class Program
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
@@ -180,6 +168,18 @@ class Program
     public function setYear(?int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

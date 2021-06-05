@@ -2,9 +2,10 @@
 {% block title %}Série #{{ program.id }}{% endblock %}
 {% block body %}
     <div>
+        <h1>{{ program.title }}</h1>
         {% for season in seasons %}
-            <h1>{{ season.description }}</h1>
-        <a href="{{ path('program_app_program_showseason', {'program_id': program.id, 'season_id': season.id}) }}">Voir la fiche</a>
+            <h2>{{ season.description }}</h2>
+        <a href="{{ path('program_season_show', {'program_id': program.id, 'season_id': season.id}) }}">Voir la fiche</a>
         {% endfor %}
     </div>
 
