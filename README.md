@@ -13,3 +13,6 @@ https://www.metacafe.com/watch/12217303/symfony-gardez-la-form/
 
 Lien vers la video générer un CRUD de la quête 13
 https://www.metacafe.com/watch/12217502/symfony-g-n-rer-un-crud/
+
+Lien vers la video validation, de la quête 14
+https://www.metacafe.com/watch/12217526/symfony-validation/

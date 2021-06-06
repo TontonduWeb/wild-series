@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @UniqueEntity("name", message="Cette catégorie existe déjà")
  */
 class Category
 {
@@ -21,7 +25,9 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=10, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(max="10", maxMessage="La cétogorie ne peut dépasser {{ limit }}, là nous sommes à {{ value }}")
      */
     private $name;
 
