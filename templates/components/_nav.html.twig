@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Wild Série</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,19 +10,21 @@
           <a class="nav-link active" aria-current="page" href="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="{{ path('program_index') }}">Les Séries</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="{{ path('category_new') }}">Ajouter une catégorie</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
+          <a class="nav-link dropdown-toggle" href="{{ path('category_index') }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Toutes les catégories
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="{{ path('category_show', {name: 'Aventure'}) }}">Aventure</a></li>
+            <li><a class="dropdown-item" href="{{ path('category_show', {name: 'Action'}) }}">Action</a></li>
+            <li><a class="dropdown-item" href="{{ path('category_show', {name: 'Animation'}) }}">Animation</a></li>
+            <li><a class="dropdown-item" href="{{ path('category_show', {name: 'Fantastique'}) }}">Fantastique</a></li>
+            <li><a class="dropdown-item" href="{{ path('category_show', {name: 'Horreur'}) }}">Horreur</a></li>
           </ul>
         </li>
       </ul>

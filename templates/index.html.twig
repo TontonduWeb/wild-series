@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>{{ accueil }}</h1>
-    <img src="{{ asset('build/twig.png') }}" alt="twig-logo"/>
+    <img src="{{ asset('build/Titre-Wild.png') }}" alt="twig-logo"/>
     <div>
         <ul>
             <li>
@@ -13,6 +13,12 @@
             </li>
             <li>
                 <a href="{{ path('program_new') }}">Ajoutez une série</a>
+            </li>
+            <li>
+                <a href="{{ path('season_new') }}">Ajoutez une saison</a>
+            </li>
+            <li>
+                <a href="{{ path('episode_new') }}">Ajoutez un episode</a>
             </li>
         </ul>
     </div>

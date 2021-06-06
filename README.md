@@ -10,3 +10,6 @@ https://www.metacafe.com/watch/12215534/11-symfony-le-param-converter/
 
 Lien vers la video garder la form de la quête 12
 https://www.metacafe.com/watch/12217303/symfony-gardez-la-form/
+
+Lien vers la video générer un CRUD de la quête 13
+https://www.metacafe.com/watch/12217502/symfony-g-n-rer-un-crud/

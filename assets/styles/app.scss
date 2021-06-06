@@ -24,12 +24,14 @@ h1, h2 {
 .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .nav-link.active{
    color: $primary;
 }
-a {
+a, label {
    color: $danger;
 }
-label {
-   color: $danger;
+
+th, td{
+   color: white;
 }
+
 p {
    color: $secondary;
 }
