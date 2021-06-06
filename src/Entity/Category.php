@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
  */
 class Category
 {
+    public const CATEGORY_AVENTURE = 'Aventure';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
