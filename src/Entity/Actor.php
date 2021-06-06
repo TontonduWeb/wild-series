@@ -2,21 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
- * @UniqueEntity("name", message="Cette catégorie existe déjà")
+ * @ORM\Entity(repositoryClass=ActorRepository::class)
  */
-class Category
+class Actor
 {
-    public const CATEGORY_AVENTURE = 'Aventure';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,14 +20,12 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(max="10", maxMessage="La cétogorie ne peut dépasser {{ limit }}, là nous sommes à {{ value }}")
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Program::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Program::class, inversedBy="actors")
      */
     private $programs;
 
@@ -70,7 +63,6 @@ class Category
     {
         if (!$this->programs->contains($program)) {
             $this->programs[] = $program;
-            $program->setCategory($this);
         }
 
         return $this;
@@ -78,12 +70,7 @@ class Category
 
     public function removeProgram(Program $program): self
     {
-        if ($this->programs->removeElement($program)) {
-            // set the owning side to null (unless already changed)
-            if ($program->getCategory() === $this) {
-                $program->setCategory(null);
-            }
-        }
+        $this->programs->removeElement($program);
 
         return $this;
     }
