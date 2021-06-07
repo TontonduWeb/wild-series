@@ -34,6 +34,11 @@ class Actor
         $this->programs = new ArrayCollection();
     }
 
+    public function getSelector() : string
+    {
+        return $this->getId() . ' - ' . $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -19,3 +19,6 @@ https://www.metacafe.com/watch/12217526/symfony-validation/
 
 Lien vers la video ManyToMany, de la quête 15
 https://www.metacafe.com/watch/12217609/symfony-doctrine-relations-many-to-many/
+
+Lien vers la quête entityType de la quête 16
+https://www.metacafe.com/watch/12217863/symfony-entitytype/

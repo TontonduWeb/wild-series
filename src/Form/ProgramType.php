@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Actor;
 use App\Entity\Category;
 use App\Entity\Program;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,9 +23,15 @@ class ProgramType extends AbstractType
             ->add('country')
             ->add('year')
             ->add('category', EntityType::class, [
-               'class' => Category::class,
+                'class' => Category::class,
                 'choice_label' => 'name'])
-        ;
+            ->add('actors', EntityType::class, [
+                'class' => Actor::class,
+                'choice_label' => 'selector',
+                'expanded' => true,
+                'multiple' => true,
+                'by_reference' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
