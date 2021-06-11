@@ -67,10 +67,8 @@ class CategoryController extends AbstractController
                 'No category with this name : ' . $name . ' found in category\'s table.'
             );
         }else{
-            $myLimit = 3;
             $programs = $programRepository->findBy(['category' => $category],
-                    ['id' => 'DESC'],
-                    $myLimit);
+                    ['id' => 'DESC']);
         }
 
         return $this->render('category/show.html.twig', [

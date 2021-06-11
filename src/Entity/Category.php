@@ -16,7 +16,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
  */
 class Category
 {
-    public const CATEGORY_AVENTURE = 'Aventure';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

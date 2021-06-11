@@ -22,3 +22,6 @@ https://www.metacafe.com/watch/12217609/symfony-doctrine-relations-many-to-many/
 
 Lien vers la quête entityType de la quête 16
 https://www.metacafe.com/watch/12217863/symfony-entitytype/
+
+Lien vers la quête fixtures avancées de la 17
+https://www.metacafe.com/watch/12220040/les-fixtures-avanc-es-avec-jointures/
