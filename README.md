@@ -28,3 +28,6 @@ https://www.metacafe.com/watch/12220040/les-fixtures-avanc-es-avec-jointures/
 
 Lien vers la quête service avancées de la 18
 https://www.metacafe.com/watch/12220779/symfony-introduction-aux-services/
+
+Lien vers la quête envoi d'email de la quête 19
+https://www.metacafe.com/watch/12220869/symfony-envoi-d-e-mail/
