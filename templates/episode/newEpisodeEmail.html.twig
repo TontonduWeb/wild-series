@@ -1,0 +1,9 @@
+{% extends 'layoutEmail.html.twig' %}
+{% block title %} {{ episode.title }}{% endblock %}
+{% block body %}
+    <h1>Nouvel episode - {{ episode.title }}</h1>
+    <h2>De la serie : {{ episode.season.program.title }}</h2>
+    <p>Disponible dès à présent sur Wild Series "{{ episode.title }}"</p>
+    <p>Laisser vous inspirer : {{ episode.synopsis }}</p>
+    <a href="{{ path('program_season_show', {'slug': episode.season.program.slug, 'season': episode.season.id}) }}"><p>Accédez à toutes les episodes</p></a>
+{% endblock %}
