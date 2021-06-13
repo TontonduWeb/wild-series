@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository"))
  * @Assert\EnableAutoMapping()
+ * @UniqueEntity(fields={"title"}, errorPath="title", message="La série existe déjà")
  */
 class Program
 {
@@ -46,7 +47,6 @@ class Program
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank
      */
     private $synopsis;
 
@@ -70,6 +70,11 @@ class Program
      * @ORM\ManyToMany(targetEntity=Actor::class, mappedBy="programs")
      */
     private $actors;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -219,6 +224,18 @@ class Program
         if ($this->actors->removeElement($actor)) {
             $actor->removeProgram($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

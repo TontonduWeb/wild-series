@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -21,6 +22,13 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         'Chernobyl',
     ];
 
+    private $slug;
+
+    public function __construct(Slugify $slug)
+    {
+        $this->slug = $slug;
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach (self::PROGRAMS as $key => $programName){
@@ -29,7 +37,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program
                     ->setTitle($programName)
                     ->setSynopsis('bliblibli')
-                    ->setSummary('blobloblo');
+                    ->setSummary('blobloblo')
+                    ->setSlug($this->slug->generate($program->getTitle()));
             for($i=0; $i < count(CategoryFixtures::CATEGORIES); $i++){
                 $program->setCategory($this->getReference('category_' . $i));
             }

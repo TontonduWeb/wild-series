@@ -10,7 +10,7 @@
     <div>
         <ul>
             <li>
-                <a href="{{ path('program_season_show', {'program_id': episode.season.program.id, 'season_id': episode.season.id}) }}">Retourner à la saison {{ season.number}} de {{ program.title }}</a>
+                <a href="{{ path('program_season_show', {'slug': program.slug, 'season': episode.season.id}) }}">Retourner à la saison {{ season.number}} de {{ program.title }}</a>
             </li>
             <li>
                 <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>

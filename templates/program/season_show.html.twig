@@ -7,13 +7,13 @@
     <div>
            <h1>{{ seasons.description }}</h1>
         {% for episode in episodes %}
-            <a href="{{ path('program_episode_show', {'program': episode.season.program.id, 'season': episode.season.id, 'episode': episode.id}) }}"><h3>Episode {{ loop.index}} - {{ episode.title }}</h3></a>
+            <a href="{{ path('program_episode_show', {'slug': episode.season.program.slug, 'season': episode.season.id, 'episode_slug': episode.slug}) }}"><h3>Episode {{ loop.index}} - {{ episode.title }}</h3></a>
         {% endfor %}
     </div>
     <div>
         <ul>
             <li>
-                <a href="{{ path('program_show', {'id' : programs.id}) }}">Retour à la série </a>
+                <a href="{{ path('program_show', {'slug' : programs.slug}) }}">Retour à la série </a>
             </li>
             <li>
                 <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>

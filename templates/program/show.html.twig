@@ -5,7 +5,7 @@
         <h1>{{ program.title }}</h1>
         {% for season in seasons %}
             <h2>{{ season.description }}</h2>
-        <a href="{{ path('program_season_show', {'program_id': program.id, 'season_id': season.id}) }}">Voir la fiche</a>
+        <a href="{{ path('program_season_show', {'slug': program.slug, 'season': season.id}) }}">Voir la fiche</a>
         {% endfor %}
     </div>
 
