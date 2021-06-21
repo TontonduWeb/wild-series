@@ -31,3 +31,6 @@ https://www.metacafe.com/watch/12220779/symfony-introduction-aux-services/
 
 Lien vers la quête envoi d'email de la quête 19
 https://www.metacafe.com/watch/12220869/symfony-envoi-d-e-mail/
+
+Lien vers la quête Gestion des utilisateurs de la quête 20
+https://www.metacafe.com/watch/12224217/20-symfony-gestion-des-utilisateurs/

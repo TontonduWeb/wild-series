@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,36 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateOfBirth;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author")
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,5 +145,83 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeInterface
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): self
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

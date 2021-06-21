@@ -8,9 +8,32 @@
         <p>Synopsis : {{ episode.synopsis }}</p>
     </div>
     <div>
+        {% if app.user %}
+            <h3>Ajouter un commentaire à cette episode</h3>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button>Submit</button>
+            {{ form_end(form) }}
+        {% endif %}
+    </div>
+    <div>
+        {% if episode.comments is not empty %}
+            <h4>Commentaires :</h4>
+            {% for comment in episode.comments|reverse %}
+                <ul>
+                    <li>
+                        Auteur : {{ comment.author.name }} {{ comment.author.firstname }} - {{ comment.comment }} - Note : {{ comment.rate }} - Série : {{ comment.episode.season.program.title }}
+                    </li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        <h4>Retour</h4>
         <ul>
             <li>
-                <a href="{{ path('program_season_show', {'slug': program.slug, 'season': episode.season.id}) }}">Retourner à la saison {{ season.number}} de {{ program.title }}</a>
+                <a href="{{ path('program_season_show', {'slug': program.slug, 'season': episode.season.id}) }}">Retourner
+                    à la saison {{ season.number }} de {{ program.title }}</a>
             </li>
             <li>
                 <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>

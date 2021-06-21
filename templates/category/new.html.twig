@@ -1,9 +1,6 @@
 {% extends "base.html.twig" %}
-
+{% block title %}Ajouter une nouvelle catégorie{% endblock %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button>Valider le formulaire</button>
-    {{ form_end(form) }}
-
+    <h1>Ajoutez une nouvelle catégorie au site</h1>
+    {% include ('components/_form.html.twig') %}
 {% endblock %}
